@@ -1,20 +1,14 @@
-import { useRouter } from "next/dist/client/router";
-import Link from "next/link";
-import { useState } from "react";
+import Image from 'next/image'
 
 const App = () => {
-  const [name, setName] = useState();
-  const router = useRouter();
   return (
     <div>
-      <button type="button" onClick={() => router.push("/tomato")}>tomato로 가기</button>
-      <p>이름</p>
-      <input 
-        value={name}
-        onChange={(e) => setName(e.target.value)}
-        style={{ marginRight: "12px" }}
+      <Image 
+        src="/snowball.png" 
+        alt="스노우볼"
+        width={350}
+        height={350}
       />
-      <button type="button" onClick={() => router.push('/vegetable/${name}')}>{name}으로 가기</button>
     </div>
   );
 };

@@ -34,7 +34,7 @@ const AppBar = () => {
                 </Link>
               </Nav.Item>
               <Nav.Item>
-                <Link href="minamtv">
+                <Link href="/minamtv">
                   <a className="text-dark d-flex justify-content-center">
                     <p className="me-1">미남TV</p>
                     <Image

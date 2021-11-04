@@ -11,7 +11,15 @@ const ContentDetail = () => {
   return (
     <Layout>
       <section>
-        <h2>여기는 {id}의 상세페이지입니다.</h2>
+        <div className="d-flex flex-wrap justify-content-center">
+          <video width={500} height={400} controls>
+            <source
+              src="https://ddbee68k5dh5z.cloudfront.net/sample-mp4-file.mp4"
+              type="video/mp4"
+            />
+          </video>
+        </div>
+        <h2>{id}번 콘텐츠 상세페이지입니다.</h2>
       </section>
     </Layout>
   );

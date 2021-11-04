@@ -4,6 +4,8 @@ import Image from "next/image";
 import styles from "../styles/Home.module.css";
 import Layout from "../components/layout";
 
+import { useRouter } from "next/router";
+
 interface ThumbsProp {
   thumbs: Thumb[];
 }
@@ -17,6 +19,7 @@ interface Thumb {
 }
 
 const Home = ({ thumbs }: ThumbsProp) => {
+  const router = useRouter();
   console.log(thumbs);
 
   return (
@@ -37,7 +40,14 @@ const Home = ({ thumbs }: ThumbsProp) => {
                 <div
                   key={`content-item-${index}`}
                   className="card"
-                  style={{ marginRight: "1rem", marginTop: "0.5rem" }}
+                  style={{
+                    marginRight: "1rem",
+                    marginTop: "0.5rem",
+                    cursor: "pointer",
+                  }}
+                  onClick={() => {
+                    router.push(`contents/detail/${item.id}`);
+                  }}
                 >
                   {/* 컨텐트 wrapper --- 시작 */}
                   <div>

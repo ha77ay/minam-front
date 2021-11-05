@@ -1,8 +1,10 @@
 import Head from "next/head";
 
 import React from "react";
+import head from "next/head";
+
 import styles from "./layout.module.css";
-import SideBar from "./sidebar";
+import Sidebar from "./sidebar/sidebar";
 
 interface LayoutProps {
   children: React.ReactNode;
@@ -14,11 +16,8 @@ export default function Layout({ children }: LayoutProps) {
       <Head>
         <title>Myworkspace</title>
       </Head>
-      <header>
-        {" "}
-        <SideBar />
-      </header>
-      <main className={styles.main}>{children}</main>
+      <header>헤더입니다</header>
+      <main className={styles.main}></main>
     </>
   );
 }

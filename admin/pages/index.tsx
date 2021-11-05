@@ -7,11 +7,7 @@ import Layout from "../components/layout";
 import styles from "../styles/Home.module.css";
 
 const Home: NextPage = () => {
-  return (
-      <section>
-        <p>Dashboard</p>
-      </section>
-  );
+  return <div>인덱스입니다</div>;
 };
 
 export default Home;

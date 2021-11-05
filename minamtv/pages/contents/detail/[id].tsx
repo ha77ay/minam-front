@@ -13,7 +13,14 @@ const ContentDetail = () => {
     <Layout>
       <section>
         <div className="d-flex flex-wrap justify-content-center">
-          <video width={500} height={400} controls>
+          <video
+            width={500}
+            height={400}
+            // controls
+            onClick={(e) => {
+              router.push("/");
+            }}
+          >
             <source
               src="https://ddbee68k5dh5z.cloudfront.net/sample-mp4-file.mp4"
               type="video/mp4"

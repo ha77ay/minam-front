@@ -1,3 +1,4 @@
+import { auto } from "@popperjs/core";
 import { useRouter } from "next/router";
 import Layout from "../../../components/layout";
 
@@ -19,7 +20,9 @@ const ContentDetail = () => {
             />
           </video>
         </div>
-        <h2>{id}번 콘텐츠 상세페이지입니다.</h2>
+        <div className="d-flex flex-wrap justify-content-center mt-3">
+          <h2>{id}번 콘텐츠 상세페이지입니다.</h2>
+        </div>
       </section>
     </Layout>
   );

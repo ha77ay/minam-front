@@ -16,10 +16,10 @@ const ContentDetail = () => {
           <video
             width={500}
             height={400}
-            // controls
-            onClick={(e) => {
-              router.push("/");
-            }}
+            controls
+            // onClick={(e) => {
+            //   router.push("/");
+            // }}
           >
             <source
               src="https://ddbee68k5dh5z.cloudfront.net/sample-mp4-file.mp4"

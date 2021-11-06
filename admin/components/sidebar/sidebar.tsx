@@ -1,18 +1,21 @@
+import React from "react";
 import Link from "next/link";
 import styles from "./sidebar.module.css";
 
 export default function Sidebar() {
   return (
     <nav className={styles.nav}>
-      <input className={styles.input} placeholder="Search..." />
-      <Link href="/about">
-        <a>1번</a>
+      <Link href="/">
+        <a>DECAF</a>
       </Link>
-      <Link href="/about/history">
-        <a>History</a>
+      <Link href="/">
+        <a>SINGLE ORIGIN</a>
       </Link>
-      <Link href="/about/contact">
-        <a>Contact</a>
+      <Link href="/">
+        <a>BLEND</a>
+      </Link>
+      <Link href="/">
+        <a>COLD BREW</a>
       </Link>
     </nav>
   );

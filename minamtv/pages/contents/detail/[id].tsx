@@ -13,10 +13,10 @@ interface Content {
 }
 
 interface DetailProp {
-  playVideo: Content;
+  uploadedVideo: Content;
 }
 
-const ContentDetail = ({ playVideo }: DetailProp) => {
+const ContentDetail = ({ uploadedVideo }: DetailProp) => {
   const router = useRouter();
 
   // /contents/detail/[id]
@@ -35,12 +35,12 @@ const ContentDetail = ({ playVideo }: DetailProp) => {
             //   router.push("/");
             // }}
           >
-            <source src={playVideo.contentUrl} type="video/mp4" />
+            <source src={uploadedVideo.contentUrl} type="video/mp4" />
           </video>
         </div>
         <div className="d-flex flex-column mt-3">
-          <h2>{playVideo.contentName}</h2>
-          <h6>{playVideo.createdDay}</h6>
+          <h2>{uploadedVideo.contentName}</h2>
+          <h6>{uploadedVideo.createdDay}</h6>
         </div>
       </section>
     </Layout>
@@ -52,7 +52,7 @@ export const getServerSideProps: GetServerSideProps = async (context) => {
 
   // Fetch data from external API
 
-  const playVideo = {
+  const uploadedVideo = {
     contentId: 1,
     id: 1,
     contentName: "1분 안에 알아보는 윤곽주사 Before & After",
@@ -62,7 +62,7 @@ export const getServerSideProps: GetServerSideProps = async (context) => {
     viewCount: 0,
   };
   // Pass data to the page via props
-  return { props: { playVideo } };
+  return { props: { uploadedVideo } };
 };
 
 export default ContentDetail;

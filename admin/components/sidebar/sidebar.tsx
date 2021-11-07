@@ -1,21 +1,21 @@
 import React from "react";
 import Link from "next/link";
-import styles from "./sidebar.module.css";
+import styles from "./sidebar.module.scss";
 
 export default function Sidebar() {
   return (
     <nav className={styles.nav}>
       <Link href="/">
-        <a>DECAF</a>
+        <a>파트너관리</a>
       </Link>
       <Link href="/">
-        <a>SINGLE ORIGIN</a>
+        <a>이벤트관리</a>
       </Link>
       <Link href="/">
-        <a>BLEND</a>
+        <a>과금관리</a>
       </Link>
       <Link href="/">
-        <a>COLD BREW</a>
+        <a>미남TV관리</a>
       </Link>
     </nav>
   );

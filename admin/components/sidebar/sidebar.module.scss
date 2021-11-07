@@ -1,8 +1,11 @@
+$sideWidth: 250px;
+$baeminColor: #2abbb6;
+
 .nav {
   display: flex;
   flex-direction: column;
-  width: 250px;
-  background-color: #fafafa;
+  width: $sideWidth;
+  background-color: $baeminColor;
   padding: 32px;
   border-right: 1px solid #eaeaea;
 }

@@ -1,5 +1,7 @@
 import { GetServerSideProps } from "next";
 import { useRouter } from "next/router";
+import React from "react";
+import { Button, FormControl, InputGroup } from "react-bootstrap";
 import Layout from "../../../components/layout";
 
 interface Content {
@@ -25,8 +27,9 @@ const ContentDetail = ({ uploadedVideo }: DetailProp) => {
 
   return (
     <Layout>
-      <section>
-        <div className="d-flex flex-wrap justify-content-center">
+      <section className="d-flex d-flex flex-column align-items-center">
+        {/* 비디오 플레이어 */}
+        <div>
           <video
             width={500}
             height={400}
@@ -38,9 +41,23 @@ const ContentDetail = ({ uploadedVideo }: DetailProp) => {
             <source src={uploadedVideo.contentUrl} type="video/mp4" />
           </video>
         </div>
-        <div className="d-flex flex-column mt-3">
+        {/* 영상 상세정보 */}
+        <div className="mt-4">
           <h2>{uploadedVideo.contentName}</h2>
-          <h6>{uploadedVideo.createdDay}</h6>
+          <h6>
+            조회수 {uploadedVideo.viewCount}회 <span>&#183;</span>{" "}
+            {uploadedVideo.createdDay}
+          </h6>
+          <hr style={{ color: "black" }} />
+          <h6 className="mb-3">댓글 21개</h6>
+          <InputGroup>
+            <FormControl
+              placeholder="공개 댓글 추가..."
+              aria-label="댓글작성란"
+            />
+            <Button variant="outline-secondary">취소</Button>
+            <Button variant="outline-secondary">댓글</Button>
+          </InputGroup>
         </div>
       </section>
     </Layout>

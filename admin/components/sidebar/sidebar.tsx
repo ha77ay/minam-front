@@ -6,7 +6,13 @@ import Image from "next/image";
 export default function Sidebar() {
   return (
     <nav className={styles.nav}>
-      <Image src="/brand-logo-b.svg" alt="미남로고" width="166" height="44" />
+      <Image
+        src="/brand-logo-b.svg"
+        alt="미남로고"
+        width="166"
+        height="44"
+        priority
+      />
       <Link href="/">
         <a className="mt-3">DASHBOARD</a>
       </Link>
@@ -19,7 +25,7 @@ export default function Sidebar() {
       <Link href="/salespanel">
         <a>SALES</a>
       </Link>
-      <Link href="mtvpanel">
+      <Link href="/mtvpanel">
         <a>미남TV</a>
       </Link>
     </nav>

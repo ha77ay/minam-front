@@ -2,9 +2,9 @@ const mtvPanel = () => {
   return (
     <>
       <div className="d-flex flex-column">
-        <div>미남TV 제어창</div>
-        <div>테스트테스트</div>
-        <div>아아아아아</div>
+        <div>Hello MinamTV</div>
+        <div>(필수)콘텐츠 조회</div>
+        <div>(필수)콘텐츠 등록 및 삭제 기능</div>
       </div>
     </>
   );

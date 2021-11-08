@@ -16,9 +16,9 @@ export default function Layout({ children }: LayoutProps) {
   return (
     <>
       <Head>
-        <title>WEEKLY COFFEE</title>
+        <title>미남이시네요</title>
         <meta name="description" content="weekly coffee home" />
-        <link rel="icon" href="/favicon.ico" />
+        <link rel="icon" href="/minam-icon.svg" />
       </Head>
       <header></header>
 

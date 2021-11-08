@@ -25,7 +25,7 @@ export default function Sidebar() {
       <Link href="/salespanel">
         <a>SALES</a>
       </Link>
-      <Link href="/mtvpanel">
+      <Link href="/mtv">
         <a>미남TV</a>
       </Link>
     </nav>

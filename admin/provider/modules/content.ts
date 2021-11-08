@@ -1,4 +1,4 @@
-import { createSlice } from "@reduxjs/toolkit";
+import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 
 // 데이터 구조를 interface로 만듦
 export interface ContentItem {
@@ -14,7 +14,7 @@ export interface ContentItem {
   unlike: number;
   favorite: boolean;
   createdTime: number;
-  tags: string;
+  tags?: string;
   cmtId: number;
   cmtCount: number;
 }
@@ -23,6 +23,7 @@ export interface ContentItem {
 interface ContentState {
   data: ContentItem[];
   isFetched: boolean;
+  isAddCompleted?: boolean;
 }
 
 const initialState: ContentState = {
@@ -66,7 +67,8 @@ const initialState: ContentState = {
     {
       id: 0,
       title: "써마지효과, 울쎄라와 차이점! 써마지받다가 FLEX 했지 뭐야",
-      description: "피부과에 신상 리프팅 기계가 들어오면 생기는 일 선생님 저도 한번만... 신상 써마지가 들어왔다는 소식에 냅다 달려간 기범쌤 4대 써마지 보러갔다가 효과, 통증, 울쎼라와의 차이점까지 알아버렸지 뭐니 써마지리프팅 궁금하셨던 분들 어서오세요!!",
+      description:
+        "피부과에 신상 리프팅 기계가 들어오면 생기는 일 선생님 저도 한번만... 신상 써마지가 들어왔다는 소식에 냅다 달려간 기범쌤 4대 써마지 보러갔다가 효과, 통증, 울쎼라와의 차이점까지 알아버렸지 뭐니 써마지리프팅 궁금하셨던 분들 어서오세요!!",
       videoUrl: "https://ddbee68k5dh5z.cloudfront.net/sample-mp4-file.mp4",
       fileType: "video/mp4",
       fileName: "리쥬란힐러.mp4",
@@ -87,7 +89,17 @@ const initialState: ContentState = {
 const contentSlice = createSlice({
   name: "content",
   initialState,
-  reducers: {},
+  reducers: {
+    addContent: (state, action: PayloadAction<ContentItem>) => {
+      const content = action.payload;
+      // console.log("--in reducer function--");
+      // console.log(content);
+      state.data.unshift(content);
+      state.isAddCompleted = true;
+    },
+  },
 });
+
+export const { addContent } = contentSlice.actions;
 
 export default contentSlice.reducer;

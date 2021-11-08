@@ -24,6 +24,7 @@ interface ContentState {
   data: ContentItem[];
   isFetched: boolean;
   isAddCompleted?: boolean;
+  isRemoveCompleted?: boolean;
 }
 
 const initialState: ContentState = {
@@ -97,9 +98,17 @@ const contentSlice = createSlice({
       state.data.unshift(content);
       state.isAddCompleted = true;
     },
+    removeContent: (state, action: PayloadAction<number>) => {
+      const id = action.payload;
+      state.data.splice(
+        state.data.findIndex((item) => item.id === id),
+        1
+      );
+      state.isRemoveCompleted = true;
+    },
   },
 });
 
-export const { addContent } = contentSlice.actions;
+export const { addContent, removeContent } = contentSlice.actions;
 
 export default contentSlice.reducer;

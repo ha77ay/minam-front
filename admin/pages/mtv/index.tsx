@@ -32,7 +32,7 @@ const Mtv = () => {
         </div>
         <table
           className="table table-striped table-hover mt-1"
-          style={{ width: "calc(100vw - 350px" }}
+          style={{ width: "calc(100vw - 350px)" }}
         >
           <thead>
             <tr>
@@ -45,7 +45,10 @@ const Mtv = () => {
           </thead>
           <tbody>
             {content.data.map((item, index) => (
-              <tr key={`content-item-${index}`}>
+              <tr
+                key={`content-item-${index}`}
+                onClick={() => router.push(`/mtv/detail/${item.id}`)}
+              >
                 <th scope="row">{item.id}</th>
                 <td>{item.title}</td>
                 <td>{item.authorId}</td>

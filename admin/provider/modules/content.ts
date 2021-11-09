@@ -25,6 +25,7 @@ interface ContentState {
   isFetched: boolean;
   isAddCompleted?: boolean;
   isRemoveCompleted?: boolean;
+  isModifyCompleted?: boolean;
 }
 
 const initialState: ContentState = {
@@ -106,9 +107,24 @@ const contentSlice = createSlice({
       );
       state.isRemoveCompleted = true;
     },
+    modifyContent: (state, action: PayloadAction<ContentItem>) => {
+      const modifyItem = action.payload;
+      const contentItem = state.data.find((item) => item.id === modifyItem.id);
+      if (contentItem) {
+        contentItem.title = modifyItem.title;
+        contentItem.description = modifyItem.description;
+        contentItem.authorId = modifyItem.authorId;
+        contentItem.tags = modifyItem.tags;
+        contentItem.videoUrl = modifyItem.videoUrl;
+        contentItem.fileName = modifyItem.fileName;
+        // contentItem.fileType = modifyItem.fileType;
+      }
+      state.isModifyCompleted = true;
+    },
   },
 });
 
-export const { addContent, removeContent } = contentSlice.actions;
+export const { addContent, removeContent, modifyContent } =
+  contentSlice.actions;
 
 export default contentSlice.reducer;

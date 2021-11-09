@@ -23,7 +23,7 @@ const MtvDetail = () => {
   };
 
   return (
-    <section style={{ width: "70vw" }} className="mx-auto">
+    <section style={{ width: "40vw", marginTop: "5vh" }} className="mx-auto">
       <h2 className="text-center">MTV Detail</h2>
       {!contentItem && (
         <div className="text-center my-5">데이터가 없습니다.</div>
@@ -51,7 +51,7 @@ const MtvDetail = () => {
             <tr>
               <th>동영상</th>
               <td>
-                <video width={500} height={400} controls>
+                <video width={400} height={300} controls >
                   <source src={contentItem.videoUrl} type="video/mp4" />
                 </video>
               </td>
@@ -76,7 +76,7 @@ const MtvDetail = () => {
           <button
             className="btn btn-primary me-1"
             onClick={() => {
-              router.push(`/photos/edit/${id}`);
+              router.push(`/mtv/edit/${id}`);
             }}
           >
             <i className="bi bi-pencil me-1" />

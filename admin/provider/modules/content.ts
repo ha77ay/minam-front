@@ -9,14 +9,10 @@ export interface ContentItem {
   fileType: string;
   fileName: string;
   authorId: string;
-  viewCount: number;
   like: number;
   unlike: number;
-  favorite: boolean;
   createdTime: number;
   tags?: string;
-  cmtId: number;
-  cmtCount: number;
 }
 
 // 백엔드 연동 고려해서 state 구조를 설계
@@ -39,14 +35,10 @@ const initialState: ContentState = {
       fileType: "video/mp4",
       fileName: "필링시술.mp4",
       authorId: "조이PD",
-      viewCount: 39148,
       like: 285,
       unlike: 3,
-      favorite: false,
       createdTime: new Date().getTime(),
       tags: "#필링 #각질제거 #아쿠아필 #알라딘필 #필링시술",
-      cmtId: 1,
-      cmtCount: 5,
     },
     {
       id: 1,
@@ -57,14 +49,10 @@ const initialState: ContentState = {
       fileType: "video/mp4",
       fileName: "리쥬란힐러.mp4",
       authorId: "정수진PD",
-      viewCount: 73077,
       like: 47,
       unlike: 5,
-      favorite: false,
       createdTime: new Date().getTime(),
       tags: "#피부시술 #스킨부스터 리쥬란힐러 #연어주사",
-      cmtId: 1,
-      cmtCount: 25,
     },
     {
       id: 0,
@@ -75,14 +63,10 @@ const initialState: ContentState = {
       fileType: "video/mp4",
       fileName: "리쥬란힐러.mp4",
       authorId: "최유리PD",
-      viewCount: 343071,
       like: 264,
       unlike: 13,
-      favorite: false,
       createdTime: new Date().getTime(),
       tags: "#써마지통증 #써마지리프팅 #울쎄라",
-      cmtId: 2,
-      cmtCount: 64,
     },
   ],
   isFetched: false,

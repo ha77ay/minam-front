@@ -40,7 +40,6 @@ const Mtv = () => {
               <th scope="col">제목</th>
               <th scope="col">담당자</th>
               <th scope="col">등록일</th>
-              <th scope="col">조회수</th>
             </tr>
           </thead>
           <tbody>
@@ -53,7 +52,6 @@ const Mtv = () => {
                 <td>{item.title}</td>
                 <td>{item.authorId}</td>
                 <td>{getTimeString(item.createdTime)}</td>
-                <td>{item.viewCount}</td>
               </tr>
             ))}
           </tbody>

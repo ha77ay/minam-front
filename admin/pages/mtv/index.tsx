@@ -1,14 +1,52 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { useRouter } from "next/router";
 import { useSelector } from "react-redux";
 import { RootState } from "../../provider";
 import "bootstrap-icons/font/bootstrap-icons.css";
 import { getTimeString } from "../../lib/string";
+import api from "../../api/content";
+
+interface ContentItemState {
+  id: number;
+  title: string | undefined;
+  description?: string;
+  videoUrl: string;
+  authorId: string;
+  createdTime: number;
+  tags?: string;
+}
 
 const Mtv = () => {
-  // content state 전체를 가져옴
+  // data fetch 해올때 이용할 local state
+  const [contentList, setContentList] = useState<ContentItemState[]>([]);
+  // redux store에서 content state 전체를 가져옴
   const content = useSelector((state: RootState) => state.content);
   const router = useRouter();
+
+  const fetchData = async () => {
+    // 백엔드에서 데이터를 받아옴
+    const res = await api.fetch();
+
+    // axios로 서버에서 응답받은 data를 state 객체로 변환함
+    const contents = res.data.map((item) => ({
+      id: item.id,
+      title: item.title,
+      description: item.description,
+      videoUrl: item.videoUrl,
+      authorId: item.authorId,
+      createdTime: item.createdTime,
+      tags: item.tags,
+    })) as ContentItemState[];
+
+    setContentList(contents); // local state를 업데이트
+    console.log("-- 2. await axios.get completed--");
+  };
+
+  useEffect(() => {
+    console.log("--1. mounted--");
+    // 백엔드에서 데이터를 받아올 것임 마운팅되는 시점에
+    fetchData();
+  }, []);
 
   return (
     <>
@@ -43,7 +81,7 @@ const Mtv = () => {
             </tr>
           </thead>
           <tbody>
-            {content.data.map((item, index) => (
+            {contentList.map((item, index) => (
               <tr
                 key={`content-item-${index}`}
                 onClick={() => router.push(`/mtv/detail/${item.id}`)}

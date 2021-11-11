@@ -1,8 +1,9 @@
 import router from "next/router";
-import { useRef } from "react";
+import React, { useRef } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { AppDispatch, RootState } from "../../provider";
 import { addContent, ContentItem } from "../../provider/modules/content";
+import api from "../../api/content";
 
 const MtvCreate = () => {
   // 입력 폼 ref 객체
@@ -18,6 +19,7 @@ const MtvCreate = () => {
   // 디스패치 함수 만들기
   const dispatch = useDispatch<AppDispatch>();
 
+  // 리덕스에 추가해주는 메서드
   const handleAddClick = () => {
     // console.log(titleInput.current?.value);
     // console.log(descTxta.current?.value);
@@ -39,14 +41,10 @@ const MtvCreate = () => {
           fileType: videoFile.type,
           fileName: videoFile.name,
           authorId: authorInput.current ? authorInput.current.value : "",
-          viewCount: 0,
           like: 0,
           unlike: 0,
-          favorite: false,
           createdTime: new Date().getTime(),
           tags: tagInput.current?.value,
-          cmtId: contentData.length ? contentData[0].id + 1 : 1,
-          cmtCount: 0,
         };
 
         // console.log(item);
@@ -62,6 +60,19 @@ const MtvCreate = () => {
 
       reader.readAsDataURL(videoFile);
     }
+  };
+
+  // 백엔드 연동하는 async 메서드(POST)
+  const add = async () => {
+    const result = await api.add({
+      title: titleInput.current?.value,
+      description: descTxta.current?.value,
+      videoUrl: fileInput.current?.value,
+      authorId: authorInput.current?.value,
+      tags: tagInput.current?.value,
+    });
+    console.log(result);
+    router.push("/mtv");
   };
 
   return (
@@ -125,7 +136,8 @@ const MtvCreate = () => {
         <button
           className="btn btn-primary float-end"
           onClick={() => {
-            handleAddClick();
+            // handleAddClick(); -- redux로 처리함
+            add();
           }}
         >
           <i className="bi bi-check" />

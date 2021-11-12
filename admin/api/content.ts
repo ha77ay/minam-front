@@ -12,15 +12,16 @@ interface ContentItemResponse {
   like: number;
   unlike: number;
   createdTime: number;
-  tags?: string;
 }
 
-interface ContentItemRequest {
+export interface ContentItemRequest {
   title: string | undefined;
   description?: string;
   videoUrl?: string;
+  fileType: string;
+  fileName: string;
   userId: string | undefined;
-  tags?: string;
+  createdTime: number;
 }
 
 // 서버하고 데이터 연동하는 api처리 목록을 별도의 객체로 작성

@@ -13,7 +13,6 @@ interface ContentItemState {
   videoUrl: string;
   userId: string;
   createdTime: number;
-  tags?: string;
 }
 
 const Mtv = () => {
@@ -35,7 +34,6 @@ const Mtv = () => {
       videoUrl: item.videoUrl,
       userId: item.userId,
       createdTime: item.createdTime,
-      tags: item.tags,
     })) as ContentItemState[];
 
     setContentList(contents); // local state를 업데이트

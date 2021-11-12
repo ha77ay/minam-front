@@ -8,7 +8,7 @@ interface ContentItemResponse {
   videoUrl: string;
   fileType?: string;
   fileName?: string;
-  authorId: string;
+  userId: string;
   like: number;
   unlike: number;
   createdTime: number;
@@ -19,7 +19,7 @@ interface ContentItemRequest {
   title: string | undefined;
   description?: string;
   videoUrl?: string;
-  authorId: string | undefined;
+  userId: string | undefined;
   tags?: string;
 }
 

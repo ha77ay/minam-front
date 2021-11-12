@@ -11,7 +11,7 @@ interface ContentItemState {
   title: string | undefined;
   description?: string;
   videoUrl: string;
-  authorId: string;
+  userId: string;
   createdTime: number;
   tags?: string;
 }
@@ -33,7 +33,7 @@ const Mtv = () => {
       title: item.title,
       description: item.description,
       videoUrl: item.videoUrl,
-      authorId: item.authorId,
+      userId: item.userId,
       createdTime: item.createdTime,
       tags: item.tags,
     })) as ContentItemState[];
@@ -88,7 +88,7 @@ const Mtv = () => {
               >
                 <th scope="row">{item.id}</th>
                 <td>{item.title}</td>
-                <td>{item.authorId}</td>
+                <td>{item.userId}</td>
                 <td>{getTimeString(item.createdTime)}</td>
               </tr>
             ))}

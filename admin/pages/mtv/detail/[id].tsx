@@ -41,7 +41,7 @@ const MtvDetail = () => {
             </tr>
             <tr>
               <th>담당자</th>
-              <td>{contentItem.authorId}</td>
+              <td>{contentItem.userId}</td>
             </tr>
             <tr>
               <th>등록일</th>

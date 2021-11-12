@@ -10,6 +10,7 @@ export interface ContentItem {
   fileName: string;
   userId: string | undefined;
   createdTime: number;
+  cmtCnt?: number;
 }
 
 // 백엔드 연동 고려해서 state 구조를 설계
@@ -60,7 +61,7 @@ const contentSlice = createSlice({
     },
     initialContent: (state, action: PayloadAction<ContentItem[]>) => {
       const contents = action.payload;
-      // 백엔드에서 받아온 데이터??
+      // 백엔드에서 받아온 데이터
       state.data = contents;
       state.isFetched = true;
     },

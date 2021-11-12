@@ -1,7 +1,7 @@
 import axios from "axios";
 
 // 서버로 부터 받아오는 데이터 1건에 대한 타입
-interface ContentItemResponse {
+export interface ContentItemResponse {
   id: number;
   title: string;
   description?: string;
@@ -9,9 +9,8 @@ interface ContentItemResponse {
   fileType?: string;
   fileName?: string;
   userId: string;
-  like: number;
-  unlike: number;
   createdTime: number;
+  cmnCnt?: number;
 }
 
 export interface ContentItemRequest {

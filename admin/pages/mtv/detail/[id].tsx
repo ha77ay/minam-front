@@ -4,6 +4,8 @@ import { getTimeString } from "../../../lib/string";
 import { AppDispatch, RootState } from "../../../provider";
 import { removeContent } from "../../../provider/modules/content";
 // import { ContentItem } from "../../../provider/modules/content";
+import { requestRemoveContent } from "../../../middleware/modules/content";
+import { useEffect } from "react";
 
 const MtvDetail = () => {
   const router = useRouter();
@@ -17,9 +19,18 @@ const MtvDetail = () => {
     state.content.data.find((item) => item.id === +id)
   );
 
+  // 삭제 여부 감지 및 가져오기
+  const isRemoveCompleted = useSelector(
+    (state: RootState) => state.content.isRemoveCompleted
+  );
+
+  useEffect(() => {
+    isRemoveCompleted && router.push("/mtv");
+  }, [isRemoveCompleted, router]);
+
   const handDeleteClick = () => {
-    dispatch(removeContent(+id));
-    router.push("/mtv");
+    // saga action으로 대체
+    dispatch(requestRemoveContent(+id));
   };
 
   return (
@@ -51,7 +62,7 @@ const MtvDetail = () => {
             <tr>
               <th>동영상</th>
               <td>
-                <video width={400} height={300} controls >
+                <video width={400} height={300} controls>
                   <source src={contentItem.videoUrl} type="video/mp4" />
                 </video>
               </td>

@@ -19,7 +19,6 @@ interface ContentState {
   isFetched: boolean;
   isAddCompleted?: boolean;
   isRemoveCompleted?: boolean;
-  isModifyCompleted?: boolean;
 }
 
 const initialState: ContentState = {
@@ -36,7 +35,7 @@ const contentSlice = createSlice({
       // console.log("--in reducer function--");
       // console.log(content);
       state.data.unshift(content);
-      state.isAddCompleted = true;
+      state.isAddCompleted = true; // 추가 되었음으로 표시
     },
     removeContent: (state, action: PayloadAction<number>) => {
       const id = action.payload;
@@ -46,18 +45,9 @@ const contentSlice = createSlice({
       );
       state.isRemoveCompleted = true;
     },
-    modifyContent: (state, action: PayloadAction<ContentItem>) => {
-      const modifyItem = action.payload;
-      const contentItem = state.data.find((item) => item.id === modifyItem.id);
-      if (contentItem) {
-        contentItem.title = modifyItem.title;
-        contentItem.description = modifyItem.description;
-        contentItem.userId = modifyItem.userId;
-        contentItem.videoUrl = modifyItem.videoUrl;
-        contentItem.fileName = modifyItem.fileName;
-        // contentItem.fileType = modifyItem.fileType;
-      }
-      state.isModifyCompleted = true;
+    initialCompleted: (state) => {
+      delete state.isAddCompleted;
+      delete state.isRemoveCompleted;
     },
     initialContent: (state, action: PayloadAction<ContentItem[]>) => {
       const contents = action.payload;
@@ -68,7 +58,7 @@ const contentSlice = createSlice({
   },
 });
 
-export const { addContent, removeContent, modifyContent, initialContent } =
+export const { addContent, removeContent, initialContent, initialCompleted } =
   contentSlice.actions;
 
 export default contentSlice.reducer;

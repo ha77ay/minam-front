@@ -6,11 +6,11 @@ export interface ContentItemResponse {
   title: string;
   description?: string;
   videoUrl: string;
-  fileType?: string;
-  fileName?: string;
+  fileType: string;
+  fileName: string;
   userId: string;
   createdTime: number;
-  cmnCnt?: number;
+  cmtCnt?: number;
 }
 
 export interface ContentItemRequest {
@@ -35,21 +35,16 @@ const contentApi = {
   // POST 요청URL HTTP/1.1  {...}
   add: (contentItem: ContentItemRequest) =>
     axios.post<ContentItemResponse>(
-      `${process.env.NEXT_PUBLIC_API_BASE}/mtv`,
+      `${process.env.NEXT_PUBLIC_API_BASE}/mtv/create`,
       contentItem
     ),
+
   // axios.delete<응답타입>(요청URL);
   // DELETE 요청URL HTTP/1.1
-  // remove: (id: number) =>
-  //   axios.delete<boolean>(`${process.env.NEXT_PUBLIC_API_BASE}/todos/${id}`),
-
-  // axios.PUT<응답타입>(요청URL, 요청객체(JSON바디));
-  // PUT 요청URL HTTP/1.1  {...}
-  // modify: (id: number, todoItem: TodoItemRequest) =>
-  //   axios.put<TodoItemResponse>(
-  //     `${process.env.NEXT_PUBLIC_API_BASE}/todos/${id}`,
-  //     todoItem
-  //   ),
+  remove: (id: number) =>
+    axios.delete<boolean>(
+      `${process.env.NEXT_PUBLIC_API_BASE}/mtv/detail/${id}`
+    ),
 };
 
 export default contentApi;

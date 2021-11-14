@@ -1,10 +1,11 @@
-import router from "next/router";
-import React, { useRef } from "react";
+import React, { useEffect, useRef } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { AppDispatch, RootState } from "../../provider";
 import { addContent, ContentItem } from "../../provider/modules/content";
 import api from "../../api/content";
 import { ContentItemRequest } from "../../api/content";
+import { requestAddContent } from "../../middleware/modules/content";
+import { useRouter } from "next/router";
 
 const MtvCreate = () => {
   // 입력 폼 ref 객체
@@ -14,75 +15,60 @@ const MtvCreate = () => {
   const fileInput = useRef<HTMLInputElement>(null);
 
   // 콘텐츠 데이터 배열 가져오기
-  // const contentData = useSelector((state: RootState) => state.content.data);
+  const contentData = useSelector((state: RootState) => state.content.data);
 
-  // 디스패치 함수 만들기
+  // 추가 완료 여부(state 변경 감지)
+  const isAddCompleted = useSelector(
+    (state: RootState) => state.content.isAddCompleted
+  );
+
+  // dispatch 함수 만들기
   const dispatch = useDispatch<AppDispatch>();
 
-  // 백엔드 연동하는 async 메서드(POST)
-  // const add = async () => {
-  //   if (fileInput.current?.files?.length) {
-  //     const videoFile = fileInput.current.files[0];
-  //     const reader = new FileReader();
-  //     reader.onload = () => {
-  //       const item: ContentItem = {
-  //         title: titleInput.current?.value,
-  //         description: descTxta.current?.value,
-  //         videoUrl: reader.result ? reader.result.toString() : "",
-  //         fileType: videoFile.type,
-  //         fileName: videoFile.name,
-  //         userId: userInput.current ? userInput.current.value : "",
-  //         createdTime: new Date().getTime(),
-  //       };
-  //     }
-  //   }
-  //   console.log(result);
-  //   router.push("/mtv");
-  // };
+  // router 객체 가져오기
+  const router = useRouter();
+
+  // state가 변경되면 처리되는 함수
+  useEffect(() => {
+    isAddCompleted && router.push("/mtv");
+  }, [isAddCompleted, router, dispatch]);
 
   const handleAddClick = () => {
-    console.log(titleInput.current?.value);
-    console.log(descTxta.current?.value);
-    console.log(userInput.current?.value);
+    // console.log(titleInput.current?.value);
+    // console.log(descTxta.current?.value);
+    // console.log(userInput.current?.value);
     if (fileInput.current?.files?.length) {
-      console.log(fileInput.current?.files[0]);
+      // console.log(fileInput.current?.files[0]);
+    }
+
+    if (fileInput.current?.files?.length) {
+      const videoFile = fileInput.current.files[0];
+      const reader = new FileReader();
+      reader.onload = () => {
+        // 추가할 객체 생성
+        const item: ContentItem = {
+          // 기존 데이터의 id 중에서 가장 큰 것 + 1
+          id: contentData.length ? contentData[0].id + 1 : 1,
+          // 입력 정보
+          title: titleInput.current ? titleInput.current.value : "",
+          description: descTxta.current?.value,
+          videoUrl: reader.result ? reader.result.toString() : "",
+          fileType: videoFile.type,
+          fileName: videoFile.name,
+          userId: userInput.current ? userInput.current.value : "",
+          createdTime: new Date().getTime(),
+        };
+
+        // 기존 redux action 으로 처리
+        // dispatch(addContent(item))
+
+        // saga action으로 대체
+        dispatch(requestAddContent(item));
+      };
+
+      reader.readAsDataURL(videoFile);
     }
   };
-
-  //   if (fileInput.current?.files?.length) {
-  //     const videoFile = fileInput.current.files[0];
-  //     const reader = new FileReader();
-  //     reader.onload = () => {
-  //       // 추가할 객체 생성
-  //       const item: ContentItemRequest = {
-  //         title: titleInput.current ? titleInput.current.value : "",
-  //         description: descTxta.current?.value,
-  //         videoUrl: reader.result ? reader.result.toString() : "",
-  //         fileType: videoFile.type,
-  //         fileName: videoFile.name,
-  //         userId: userInput.current ? userInput.current.value : "",
-  //         createdTime: new Date().getTime(),
-  //       };
-  //       dispatch(addContent(item))
-  //     };
-  //     reader.readAsDataURL(videoFile);
-  //   }
-  // };
-
-  // console.log(item);
-
-  // state에 데이터 추가
-  // addContent 함수에서 Action 객체를 생성함
-  // Action 객체를 Dispatcher에 전달함
-  // Dispatcher에서 Action.type에 맞는 리듀서 함수를 실행
-
-  //     dispatch(addContent(item));
-  //     router.push("/mtv");
-  //   };
-
-  //   reader.readAsDataURL(videoFile);
-  // }
-  // };
 
   return (
     <>

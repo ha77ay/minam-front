@@ -5,13 +5,13 @@ import { configureStore } from "@reduxjs/toolkit";
 
 // const sagaMiddleware = createSagaMiddleware();
 
-export const store = configureStore({
-  reducer: {},
-  devTools: true,
-});
+// export const store = configureStore({
+//   reducer: {},
+//   devTools: true,
+// });
 
 // root state 타입 정의
-export type RootState = ReturnType<typeof store.getState>;
+// export type RootState = ReturnType<typeof store.getState>;
 
 // dispatch 타입 정의
-export type AppDispatch = typeof store.dispatch;
+// export type AppDispatch = typeof store.dispatch;

@@ -2,6 +2,7 @@ import React from "react";
 import Head from "next/head";
 import Sidebar from "./sidebar/sidebar";
 //import styledcomponent from "styled-components";
+import EventMessage from "./EventMessage";
 
 interface LayoutProps {
   children: React.ReactNode;
@@ -31,6 +32,7 @@ export default function Layout({ children }: LayoutProps) {
       >
         <Sidebar />
         {children}
+        <EventMessage />
       </main>
     </>
   );

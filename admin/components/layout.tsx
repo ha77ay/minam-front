@@ -32,7 +32,7 @@ export default function Layout({ children }: LayoutProps) {
       >
         <Sidebar />
         {children}
-        <EventMessage />
+        {/* <EventMessage /> */}
       </main>
     </>
   );

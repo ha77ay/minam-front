@@ -1,0 +1,47 @@
+Saga 워크플로우
+
+Redux-saga : 리덕스 사이드 이펙트 관리자/ 리덕스 상태처리 전후에 뭔가를 해주는 라이브러리
+
+1. rootSaga 만들어주고
+2. redux store에서 최상위 사가(rootSaga)를 import해준다.
+3. 사가미들웨어 만들어준다(createSagaMiddleware) -- 미들웨어란? 중간에 처리해주는 소프트웨어
+
+4. redux store(dispatcher)에 미들웨어 적용해준다.
+middleware: [sagaMiddleware]
+
+5. saga middleware를 실행(rootSaga와 하위에 정의한 Redux Action들에 대해서 감지를 시작함)
+sagaMiddleware.run(rootSaga);
+
+#Redux의 구조
+comp -> dispatch(reduxAction) -> dispatcher -> reducer -> store/state 업데이트
+
+#Redux-saga의 구조(사가에서 디스패처에 들어오는 액션을 감지하고 백엔드 api 호출)
+comp -> dispatch(sagaAction) -> dispatcher 
+[[[ <-> saga -> api -> put(reduxAction) -> dispatcher ]]] (추가단계)
+-> reducer -> store/state 업데이트
+
+
+6. photo redux state 처리와 관련된 saga action들을 감지(take)할 saga를 생성
+saga는 generator 함수로 작성
+
+import photoSaga from "../"
+
+export default function* rootSaga() {
+	// 비동기로 하위 사가를 처리함 
+	// 순차적 처리가 아니라 하위 사가를 다른 실행 컨텍스트에서 수행함
+	yield fork(photoSaga);
+	yield fork(contactSaga);
+}
+
+
+7. photoSaga 코드 작성하기 (contentSaga)
+
+1) 액션 크리에이터 생성해서 requestAddPhoto를 export 해준다.
+2) PhotoCreate.tsx에서 import를 하고, saga-Action으로 처리한다.
+즉, dispatch(requestAddPhoto(item))
+3) saga action을 감지(take)하는 부분을 만든다.
+takeEvery(처리할액션, 액션을 처리할 함수)
+4) saga action을 처리할 함수를 만든다. 
+5) ㄴ addData()함수는 첫째, rest api에 post로 데이터를 보내고 둘째, redux state를 변경한다.
+6) side effect는 5)에서 '첫째, rest api에 post로 데이터를 보내고'에 부분에 해당한다.
+

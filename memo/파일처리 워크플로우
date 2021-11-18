@@ -1,0 +1,151 @@
+파일처리 워크플로우
+
+* build.gradle에 뭐있는지 확인할것
+AmazonS3?
+
+-------------- FileConfiguration -------------
+
+1. IAM 접속한뒤에 액세스키 다운받는다(rootkey.csv)
+2. FileConfiguration class 하나 만든다.
+3. 아까 받은 access key를 복붙한다.
+
+// S3에 접속하는 클라이언트 싱글턴을 생성
+// Spring에서 의존 주입하는 객체로 사용하겠다.
+
+
+
+--------------- FileController --------------
+@RestController
+@Autowired
+@PostMapping
+@RequestPart MultipartFile
+
+
+------------------------
+
+8080 포트로 기본세팅되어있으니까 포스트맨 열어서 보내본다,,,
+http://localhost:8080/files
+
+BODY에서 form-data를 선택
+KEY -> File 선택
+KEY -> file 선택  (@RequestPart("file")) 여기에 들어간 키(file)와 일치시켜준다.
+
+postman에서 penguin.jpg 쏴보고 log창에 찍히는지 확인해볼것
+
+
+** 어차피 사가에서 처리할거다.
+saga-action으로 호출 안하면, baseUrl로 만들어져가지고 리덕스에 있는 스토어에 들어가고,
+saga-action을 호출하면, 사가에서 base64에 돼있는걸 파일객체로 바꿔서 form-data에 넣어가지고, 백엔드에 보내줄거다. side effect 처리를 이런식으로 할거다.
+
+자바스크립트에서
+const formData = new FormData();
+formData.append("file", fileRef.current.files[0]);
+이게 base64로 한번 변환을 한 거기 때문에, blob 형태로 한번 바꿔줘야 한다.
+파일객체로 변환작업 해주고 헤더값 조정해주고 하는 백엔드작업이 필요함.
+
+
+--------------------------- 파일 메타 데이터 생성 ----------------------
+
+ObjectMetadata
+S3에 올라가는 객체 메타데이터를 설정해줌
+
+객체 key 생성
+S3에서는 파일경로가 key
+
+object key 해시 생성
+secret + filename + timestamp
+
+PutObjectRequest req = new PutObjectRequest( ... )
+
+에러뜨면 Add exception to method signature
+
+
+객체 업로드
+client.putObject(req)
+
+
+--------------
+
+객체 url을 반환하는걸로 고치자 --- (Cloudfront)의 배포
+DISTRIBUTION_URL = "클라우드프론트 도메인주소"
+
+return DISTRIBUTION_URL + objectKey <_ 제대로 업로드를 하면 이걸 반환할거다.
+
+
+---------------
+
+postman으로 파일 쏴보고 1) 로그 찍히는지 2) S3 버킷에 가서 파일 올라가있는지 확인
+
+
+S3 버킷에 가면 해시파일이 하나 만들어져 있을거다 눌러보면 
+
+publicRead
+어 이거 안열리는데 publicRead를 넣어줘야함
+.withCannedAcl(CannedAccessControlList.PublicRead)
+
+publicRead가 됐기 때문에 postman에서 쏴주면 cloudfront 주소를 반환하고
+S3버킷에서 클릭해보면 파일도 잘 열린다.
+
+
+
+----------------  삭제
+
+키값으로 삭제하면 된다.
+@DeleteMapping("/files/{objectKey}") 
+public
+
+
+
+------- 메시지큐 있는 EC2 서버에 올려놓고 돌려봐 -----
+인스턴스 새로 만든담에 자바 설치하고 빌드해서 올려서 테스트해봐
+
+FileApplication
+FileConfiguration
+FileController
+
+------- application.yml -------
+
+재윤이가 보내준 코드 참고 -1MB
+------------
+
+
+
+frontend에서는 파일올리는 API 하나 만들면 되고,
+photo에 추가할떄 dataUrl을 string으로 올리는 게 아니라 이진파일로 바꿔서 올린담에 fileUrl을 받아온다.
+그 Url을 넣어서 post해주면 된다.
+(파일저장 ppt 흐름도 참고)
+
+
+
+-------- 배포 ---------
+
+8-msa-cloud 소스코드 참고
+
+WebConfiguration <- CORS 정책 세팅해주고 
+FileConfiguration
+FileController
+FileApplication
+
+.env.local에는 
+NEXT_PUBLIC_API_BASE = "http://localhost:8080"
+NEXT_PUBLIC_FILE_BASE = "http://localhost:8081"
+
+.env.production에는 
+#백엔드 서버 주소
+NEXT_PUBLIC_API_BASE = "http://15.164.54.22:8080"
+#백엔드 파일 서버 주소
+NEXT_PUBLIC_FILE_BASE = "http://15.164.19.194:8081"
+
+* 다른 서버에 올려놨기 때문에 서버주소가 다름
+
+-------- 프론트엔드 작업 --------
+1) api에 있는 file.ts 참고 (multipart로 파일전송하는 api)
+
+2) middleware/modules/photo.ts 참고
+
+addDataPaging
+addDataNext
+
+(추가로직) dataUrl -> file 변환
+함수를 하나 만들어줬는데 lib/string.tsx 참고해라
+dataUrl을 fetch해서 응답을 blob으로 변환해줌

@@ -3,6 +3,7 @@ import Head from "next/head";
 import Sidebar from "./sidebar/sidebar";
 //import styledcomponent from "styled-components";
 import EventMessage from "./EventMessage";
+import AppBar from "./appbar";
 
 interface LayoutProps {
   children: React.ReactNode;
@@ -21,6 +22,7 @@ export default function Layout({ children }: LayoutProps) {
         <meta name="description" content="weekly coffee home" />
         <link rel="icon" href="/minam-icon.svg" />
       </Head>
+
       <header></header>
 
       <main
@@ -28,11 +30,14 @@ export default function Layout({ children }: LayoutProps) {
         style={{
           minHeight: "calc(100vh - 290px)",
           minWidth: "calc(100vw - 250px)",
+          backgroundColor: "#f1f2f7",
         }}
       >
         <Sidebar />
-        {children}
-        {/* <EventMessage /> */}
+        <div className="d-flex flex-column">
+          <AppBar />
+          {children}
+        </div>
       </main>
     </>
   );

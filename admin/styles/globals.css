@@ -14,3 +14,49 @@ a {
 * {
   box-sizing: border-box;
 }
+
+.kpi-event {
+  grid-area: kpi1;
+  background-color: #20a8d7;
+  border: 1px solid #1e93bd;
+  color: #f8f9fa;
+}
+
+.kpi-review {
+  grid-area: kpi2;
+  background-color: #b2e1ef;
+  border: 1px solid #57aac2;
+  color: #f8f9fa;
+}
+
+.kpi-reservation {
+  grid-area: kpi3;
+  background-color: #ffc007;
+  border: 1px solid #dfa80a;
+  color: #f8f9fa;
+}
+
+.kpi-profit {
+  grid-area: kpi4;
+  background-color: #f86b6b;
+  border: 1px solid #d95d5e;
+  color: #f8f9fa;
+}
+
+/* large */
+@media (min-width: 1200px) {
+  .wrapper {
+    display: grid;
+    width: 1200px;
+    margin: 0 auto;
+    grid-template-columns: repeat(4, 1fr);
+    grid-template-areas: "kpi1 kpi2 kpi3 kpi4";
+  }
+}
+
+.kpi {
+  margin-top: 3rem;
+  margin-inline-end: 1rem;
+  margin-inline-start: 1rem;
+  height: 150px;
+}

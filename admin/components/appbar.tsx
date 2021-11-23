@@ -10,7 +10,7 @@ const AppBar = () => {
     <Navbar
       style={{
         backgroundColor: "#ffffff",
-        width: "83vw",
+        width: "85vw",
         height: "8vh",
         boxShadow: "1px 2px 1px #d0d0d5",
       }}

@@ -15,6 +15,13 @@ a {
   box-sizing: border-box;
 }
 
+.kpi {
+  margin-top: 3rem;
+  margin-inline-end: 1rem;
+  margin-inline-start: 1rem;
+  height: 150px;
+}
+
 .kpi-event {
   grid-area: kpi1;
   background-color: #20a8d7;
@@ -43,6 +50,27 @@ a {
   color: #f8f9fa;
 }
 
+.main-chart {
+  grid-area: chart1;
+  background-color: aqua;
+  border: 1px solid black;
+  color: yellowgreen;
+}
+
+.sse {
+  grid-area: sse;
+  background-color: thistle;
+  border: 1px solid black;
+  color: teal;
+}
+
+.creators {
+  grid-area: crew;
+  background-color: tomato;
+  border: 1px solid black;
+  color: whitesmoke;
+}
+
 /* large */
 @media (min-width: 1200px) {
   .wrapper {
@@ -50,13 +78,8 @@ a {
     width: 1200px;
     margin: 0 auto;
     grid-template-columns: repeat(4, 1fr);
-    grid-template-areas: "kpi1 kpi2 kpi3 kpi4";
+    grid-template-areas:
+      "kpi1 kpi2 kpi3 kpi4"
+      "chart1 chart1 sse crew";
   }
-}
-
-.kpi {
-  margin-top: 3rem;
-  margin-inline-end: 1rem;
-  margin-inline-start: 1rem;
-  height: 150px;
 }

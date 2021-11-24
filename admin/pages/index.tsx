@@ -1,8 +1,48 @@
 import { ApexOptions } from "apexcharts";
-import React, { useState } from "react";
-import Chart from "react-apexcharts";
+import React, { useEffect, useState } from "react";
+import dynamic from "next/dynamic";
+const Chart = dynamic(() => import("react-apexcharts"), { ssr: false });
 
-const Admin = () => {
+interface Prop {
+  data: {
+    date: string;
+    amount: number;
+  }[];
+}
+
+const Admin = ({ data }: Prop) => {
+  // 차트 데이터 설정
+  const chartData: {
+    series: {
+      name: string;
+      data: number[];
+    }[];
+    options: ApexOptions;
+  } = {
+    // series: 실제 데이터 값
+    // [{name: "일자", data: [8702, 3400 ...]}]
+    series: [{ name: "일자", data: [8521, 44124, 213123] }],
+    options: {
+      chart: {
+        toolbar: {
+          show: false,
+        },
+      },
+      // x축의 라벨
+      xaxis: {
+        // categories: ["01-01", "01-02" ...]
+        categories: ["01-01", "01-02"],      },
+      // y축의 형식을 지정
+      yaxis: {
+        labels: {
+          formatter: function (val: number) {
+            return val.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+          },
+        },
+      },
+    },
+  };
+
   return (
     <div className="wrapper">
       <div className="kpi kpi-event">
@@ -21,9 +61,18 @@ const Admin = () => {
         <h1>₩ 570K</h1>
         <div>주간 과금액</div>
       </div>
-      <div>A차트</div>
-      <div>B차트</div>
-      <div>Server Sent Event</div>
+      <div className="main-chart">
+        {chartData && (
+          <Chart
+            options={chartData.options}
+            series={chartData.series}
+            type="line"
+            height="200px"
+          />
+        )}{" "}
+      </div>
+      <div className="sse">Server Sent Event</div>
+      <div className="creators">Crew profile</div>
     </div>
   );
 };

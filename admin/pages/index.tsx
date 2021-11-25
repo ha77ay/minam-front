@@ -21,7 +21,7 @@ const Admin = ({ data }: Prop) => {
   } = {
     // series: 실제 데이터 값
     // [{name: "일자", data: [8702, 3400 ...]}]
-    series: [{ name: "일자", data: [8521, 44124, 213123] }],
+    series: [{ name: "일자", data: [8521, 44124, 213123, 2452] }],
     options: {
       chart: {
         toolbar: {
@@ -31,7 +31,8 @@ const Admin = ({ data }: Prop) => {
       // x축의 라벨
       xaxis: {
         // categories: ["01-01", "01-02" ...]
-        categories: ["01-01", "01-02"],      },
+        categories: ["01-01", "01-02", "01-03", "01-04"],
+      },
       // y축의 형식을 지정
       yaxis: {
         labels: {
@@ -46,12 +47,12 @@ const Admin = ({ data }: Prop) => {
   return (
     <div className="wrapper">
       <div className="kpi kpi-event">
-        <h1>11건</h1>
-        <div>새 이벤트</div>
+        <h1>새 이벤트 11건</h1>
+        <div>radial bar</div>
       </div>
       <div className="kpi kpi-review">
-        <h1>20건</h1>
-        <div>새 시술후기</div>
+        <h1>새시술후기 20건</h1>
+        <div>차트 백엔드 작업</div>
       </div>
       <div className="kpi kpi-reservation">
         <h1>5건</h1>

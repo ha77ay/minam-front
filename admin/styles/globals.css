@@ -52,7 +52,6 @@ a {
 
 .main-chart {
   grid-area: chart1;
-  background-color: aqua;
   border: 1px solid black;
   color: yellowgreen;
 }

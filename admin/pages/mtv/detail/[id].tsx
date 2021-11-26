@@ -85,15 +85,6 @@ const MtvDetail = () => {
         </div>
         <div style={{ width: "50%" }} className="d-flex justify-content-end">
           <button
-            className="btn btn-primary me-1"
-            onClick={() => {
-              router.push(`/mtv/edit/${id}`);
-            }}
-          >
-            <i className="bi bi-pencil me-1" />
-            수정
-          </button>
-          <button
             className="btn btn-danger"
             onClick={() => {
               handDeleteClick();

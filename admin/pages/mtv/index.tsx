@@ -53,20 +53,20 @@ const Mtv = () => {
     <>
       <div
         className="d-flex flex-column align-items-center"
-        style={{ width: "calc(100vw - 250px)" }}
+        style={{ width: "calc(100vw - 15vw)" }}
       >
         {/* 컨텐트 */}
-        <h2 className="my-5">Hello MTV</h2>
+        {/* <h2 className="my-5">Hello MTV</h2> */}
         {/* 신규 콘텐츠 등록버튼 */}
-        <div className="align-self-end" style={{ paddingRight: "50px" }}>
+        <div className="align-self-end" style={{ paddingRight: "70px" }}>
           <button
-            className="btn btn-dark"
+            className="btn btn-success mt-3"
             onClick={() => {
               router.push("/mtv/create");
             }}
           >
             <i className="bi bi-plus" />
-            추가
+            등록
           </button>
         </div>
         <table
@@ -75,10 +75,8 @@ const Mtv = () => {
         >
           <thead>
             <tr>
-              <th scope="col">콘텐츠ID</th>
-              <th scope="col">제목</th>
-              <th scope="col">담당자</th>
-              <th scope="col">등록일</th>
+              <th scope="col">콘텐츠 정보</th>
+              <th scope="col"></th>
             </tr>
           </thead>
           <tbody>
@@ -87,10 +85,18 @@ const Mtv = () => {
                 key={`content-item-${index}`}
                 onClick={() => router.push(`/mtv/detail/${item.id}`)}
               >
-                <th scope="row">{item.id}</th>
-                <td>{item.title}</td>
-                <td>{item.userId}</td>
-                <td>{getTimeString(item.createdTime)}</td>
+                {/* <th scope="row">{item.id}</th> */}
+                <td>
+                  <h4 style={{ color: "green" }}>{item.title}</h4>
+                  <div>{item.description}</div>
+                </td>
+                {/* <td>{item.description}</td> */}
+                {/* <td>{getTimeString(item.createdTime)}</td> */}
+                <td>
+                  <video width={500}>
+                    <source src={item.videoUrl} type="video/mp4" />
+                  </video>
+                </td>
               </tr>
             ))}
           </tbody>

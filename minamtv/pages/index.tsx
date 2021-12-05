@@ -7,6 +7,8 @@ import Layout from "../components/layout";
 import { useRouter } from "next/router";
 
 import { getTimeString } from "../lib/string";
+import React from "react";
+import "bootstrap/dist/css/bootstrap.min.css";
 
 interface ContentItem {
   id: number;
@@ -37,7 +39,7 @@ const Home = ({ contents }: IndexProp) => {
         </Head>
 
         <main className={styles.main}>
-          <h2 style={{ fontWeight: "bold" }}>미남TV</h2>
+          {/* <h2 style={{ fontWeight: "bold" }}>미남TV</h2> */}
           <section>
             <div className="d-flex flex-wrap justify-content-center">
               {/* state 데이터 배열에 맵함수로 출력 */}
@@ -46,22 +48,27 @@ const Home = ({ contents }: IndexProp) => {
                   key={`content-item-${index}`}
                   className="card"
                   style={{
-                    marginRight: "1rem",
-                    marginTop: "0.5rem",
+                    width: "calc((100% - 3rem) / 4)",
+                    marginLeft: index % 4 === 0 ? "0" : "1rem",
+                    marginTop: index > 3 ? "1rem" : "0",
                     cursor: "pointer",
                   }}
                   onClick={() => {
-                    router.push(`contents/detail/${item.id}`);
+                    router.push(`detail/${item.id}`);
                   }}
                 >
                   {/* 컨텐트 wrapper --- 시작 */}
                   <div>
-                    <video>
+                    <video
+                      style={{
+                        width: "100%",
+                      }}
+                    >
                       <source src={item.videoUrl} type="video/mp4" />
                     </video>
                     <div className="card-body px-0">
                       <h6 className="card-title">{item.title}</h6>
-                      <h6>{item.description}</h6>
+                      {/* <h6>{item.description}</h6> */}
                       <h6>{item.userId}</h6>
                       <h6 className="text-muted">
                         {getTimeString(item.createdTime)}

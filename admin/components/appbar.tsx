@@ -26,7 +26,7 @@ const AppBar = () => {
           <Nav className="me-auto">
             <Nav.Item>
               <Link href="/photos">
-                <a className="text-dark">이승민</a>
+                <a className="text-dark">🌱이승민</a>
               </Link>
             </Nav.Item>
             {/* <Profile /> */}

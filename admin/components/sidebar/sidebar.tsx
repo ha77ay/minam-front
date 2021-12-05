@@ -18,14 +18,14 @@ export default function Sidebar() {
         <a className="mt-4">
           <i className="bi bi-speedometer2 me-4" />
           <span className="me-5">대시보드</span>
-          <i className="bi bi-chevron-right" />
+          {/* <i className="bi bi-chevron-right" /> */}
         </a>
       </Link>
       <Link href="/mtv">
         <a>
           <i className="bi bi-youtube me-4" />
           <span className="me-5">미남TV</span>
-          <i className="bi bi-chevron-right ms-2" />
+          {/* <i className="bi bi-chevron-right ms-2" /> */}
         </a>
       </Link>
     </nav>

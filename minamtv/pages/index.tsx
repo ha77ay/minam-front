@@ -89,7 +89,6 @@ const Home = ({ contents }: IndexProp) => {
 };
 
 export async function getServerSideProps() {
-  // Fetch data from external API
   const res = await axios.get<ContentItem[]>(
     `${process.env.NEXT_PUBLIC_API_BASE}/mtv`
   );
